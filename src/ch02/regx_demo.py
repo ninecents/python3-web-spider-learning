@@ -60,11 +60,19 @@ def common_match():
 
 
 def greedy_match():
-    # 贪婪匹配
     content = 'Hello 123 4567 World_This is a Regex Demo'
     result = re.match('^He.*?(\d+).*Demo$', content)
     print(result)
     print(result.group())
+    print(result.group(1))
+    print(result.span())
+    # 贪婪匹配
+    print('贪婪匹配')
+    content = 'Hello 123 4567 World_This is a Regex Demo'
+    result = re.match('^He.*(\d+).*Demo$', content)
+    print(result)
+    print(result.group())
+    print(result.group(1))
     print(result.span())
 
 
@@ -73,6 +81,8 @@ def match_with_modifier():
     content = '''Hello 1234567 World_This
     is a Regex Demo'''
     result = re.match('^He.*?(\d+).*?Demo$', content, re.S)
+    print(result.group(1))
+    result = re.match('^He.*?(\d+).*?Demo$', content)
     print(result.group(1))
 
 
@@ -115,5 +125,31 @@ def sub_html_match():
         print(result.strip())
 
 
+def test_compile():
+    # 编译
+    content = '2022-01-04 12:00'
+    content2 = '2022-01-11 12:10'
+    content3 = '2022-01-19 12:20'
+    pattern = re.compile('\d{2}:\d{2}')
+    result = re.sub(pattern, '', content)
+    result2 = re.sub(pattern, '', content2)
+    result3 = re.sub(pattern, '', content3)
+
+    print(result, result2, result3)
+
+
+def main():
+    # return regex_match()
+    # return match_object()
+    # return common_match()
+    # return greedy_match()
+    # return match_with_modifier()
+    # return transferred_match()
+    # return search_match()
+    # return findall_match()
+    # return sub_match()
+    # return sub_html_match()
+    return test_compile()
+
 if __name__ == '__main__':
-    sub_html_match()
+    main()
