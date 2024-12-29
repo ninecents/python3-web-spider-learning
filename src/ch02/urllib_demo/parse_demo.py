@@ -9,6 +9,7 @@
 """
 from urllib.parse import urlparse, urlunparse, urlsplit, urlunsplit, urljoin, urlencode, parse_qs, parse_qsl, quote, \
     unquote
+from urllib import error, request 
 
 
 class UrlLibDemo:
@@ -54,15 +55,26 @@ class UrlLibDemo:
 
     def print_quote(self, keyword):
         # 将内容转化为URL编码格式
-        print(self.base_url + quote(keyword))
+        print(self.base_url + quote(keyword))  # , encoding='euc-kr'
 
     def print_unquote(self):
         # 对URL进行解码
         print(unquote(self.base_url))
 
+    # khz, 2024-12-28, add
+    def catch_error(self):
+        # URLError
+        url = 'https://www.cuiqingcai.com/404'
+        try:
+            request.urlopen(url)
+        except error.URLError as e:
+            print(e)
+            print(dir(e))
 
-if __name__ == '__main__':
+
+def main():
     urllib_demo = UrlLibDemo()
+    # return urllib_demo.catch_error()
     # urllib_demo.base_url = 'https://www.baidu.com/index.html#comment'
     # urllib_demo.allow_fragments = False
     #
@@ -80,21 +92,26 @@ if __name__ == '__main__':
     # urllib_demo.base_url = 'https://www.baidu.com'
     # urllib_demo.print_urljoin('FAQ.html')
 
-    # urllib_demo.base_url = 'https://www.baidu.com?'
-    # params = {
-    #     'name': 'germey',
-    #     'age': 25
-    # }
-    # urllib_demo.print_urlencode(params)
+    urllib_demo.base_url = 'https://www.baidu.com?'
+    params = {
+        'name': 'germey',
+        'age': 25
+    }
+    urllib_demo.print_urlencode(params)
 
-    # query = 'name=germey&age=25'
-    # urllib_demo.print_parse_qs(query)
+    query = 'name=germey&age=25'
+    urllib_demo.print_parse_qs(query)
 
-    # urllib_demo.print_parse_qsl(query)
+    urllib_demo.print_parse_qsl(query)
 
-    # keyword = '壁纸'
-    # urllib_demo.base_url = 'https://www.baidu.com/s?wd='
-    # urllib_demo.print_quote(keyword)
+    keyword = '壁纸'
+    urllib_demo.base_url = 'https://www.baidu.com/s?wd='
+    urllib_demo.print_quote(keyword)
 
     urllib_demo.base_url = 'https://www.baidu.com/s?wd=%E5%A3%81%E7%BA%B8'
     urllib_demo.print_unquote()
+
+
+if __name__ == '__main__':
+    main()
+    

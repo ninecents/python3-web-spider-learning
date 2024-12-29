@@ -16,6 +16,21 @@ from urllib.request import HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler
 from urllib.request import ProxyHandler, build_opener
 
 
+def get_proxy_hander():
+    prefix_http = 'http://'
+    prefix_https = 'https://'
+    # prefix_http = ''
+    # prefix_https = ''
+    port = '8080'
+    port = '8118'
+    port = '8888'
+    proxy_hander = ProxyHandler({
+        'http': prefix_http + '127.0.0.1:' + port,
+        'https': prefix_https + '127.0.0.1:' + port
+    })
+    return proxy_hander
+
+
 def valid():
     username = 'admin'
     password = 'admin'
@@ -35,9 +50,12 @@ def valid():
 
 
 def proxy():
+    port = '8080'
+    port = '8118'
+    port = '8888'
     proxy_hander = ProxyHandler({
-        'http': 'http://127.0.0.1:8080',
-        'https': 'https://127.0.0.1:8080'
+        'http': 'http://127.0.0.1:' + port,
+        'https': 'https://127.0.0.1:' + port
     })
 
     opener = build_opener(proxy_hander)
@@ -48,13 +66,25 @@ def proxy():
         print(e.reason)
 
 
+def cookie_values_failed_example():
+    # 声明CookieJar对象
+    cookie = http.cookiejar.CookieJar()
+    # 构建Handler
+    handler = urllib.request.HTTPCookieProcessor(cookie)
+    # 构建Opener（传递的是可变参数列表，不是一个为数组的变量）
+    opener = urllib.request.build_opener([handler, get_proxy_hander()])
+    response = opener.open('https://www.baidu.com')
+    for item in cookie:
+        print(item.name + '=' + item.value)
+
+
 def cookie_values():
     # 声明CookieJar对象
     cookie = http.cookiejar.CookieJar()
     # 构建Handler
     handler = urllib.request.HTTPCookieProcessor(cookie)
     # 构建Opener
-    opener = urllib.request.build_opener(handler)
+    opener = urllib.request.build_opener(handler, get_proxy_hander())
     response = opener.open('https://www.baidu.com')
     for item in cookie:
         print(item.name + '=' + item.value)
@@ -64,7 +94,7 @@ def cookie_mozilla_content():
     if not os.path.exists('../files'):
         os.mkdir('../files')
 
-    filename = 'files/mozilla_cookie.txt'
+    filename = '../files/mozilla_cookie.txt'
     cookie = http.cookiejar.MozillaCookieJar(filename)
     handler = urllib.request.HTTPCookieProcessor(cookie)
     opener = urllib.request.build_opener(handler)
@@ -76,7 +106,7 @@ def cookie_lwp_content():
     if not os.path.exists('../files'):
         os.mkdir('../files')
 
-    filename = 'files/lwp_cookie.txt'
+    filename = '../files/lwp_cookie.txt'
     cookie = http.cookiejar.LWPCookieJar(filename)
     handler = urllib.request.HTTPCookieProcessor(cookie)
     opener = urllib.request.build_opener(handler)
@@ -86,12 +116,21 @@ def cookie_lwp_content():
 
 def cookie_use_lwp():
     cookie = http.cookiejar.LWPCookieJar()
-    cookie.load('files/lwp_cookie.txt', ignore_discard=True, ignore_expires=True)
+    cookie.load('../files/lwp_cookie.txt', ignore_discard=True, ignore_expires=True)
     handler = urllib.request.HTTPCookieProcessor(cookie)
     opener = urllib.request.build_opener(handler)
     response = opener.open('https://www.baidu.com')
     print(response.read().decode('utf-8'))
 
 
+def main() -> None:
+    # valid()
+    # proxy()
+    # cookie_values_failed_example()
+    return cookie_values()
+    # cookie_mozilla_content()
+    # cookie_lwp_content()
+    cookie_use_lwp()
+
 if __name__ == '__main__':
-    valid()
+    main()

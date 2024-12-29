@@ -81,7 +81,7 @@ def check_request():
     exit() if not r.status_code == requests.codes.ok else print('Request Successfully')
 
 
-if __name__ == '__main__':
+def main():
     # url = 'https://www.httpbin.org/get'
     # data = {
     #     'name': 'germey',
@@ -90,4 +90,16 @@ if __name__ == '__main__':
     #
     # print_get_with_params(url, data)
 
-    check_request()
+    # return print_get_request()
+    # return print_request()
+    # return print_get_with_params('https://www.httpbin.org/get', {'name': 'germey', 'age': '25'})
+    # return print_json()
+    # return fetch_web()
+    # return get_favicon()
+    # return print_get_with_headers()
+    # return print_post()
+    return check_request()
+
+
+if __name__ == '__main__':
+    main()
