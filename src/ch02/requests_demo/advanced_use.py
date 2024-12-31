@@ -17,12 +17,12 @@ urllib3.disable_warnings()
 def get_proxy():
     prefix_http = 'http://'
     prefix_https = 'https://'
-    prefix_http = ''
-    prefix_https = ''
+    # prefix_http = ''
+    # prefix_https = ''
     port = '8080'   
     port = '8118'   # SSR
     port = '8866'   # fiddler
-    port = '8888'   # charles
+    # port = '8888'   # charles
     proxy = {
         'http': prefix_http + '127.0.0.1:' + port,
         'https': prefix_https + '127.0.0.1:' + port
@@ -81,7 +81,7 @@ def print_prepared_request():
 
 
 def main():
-    # return upload_file()
+    return upload_file()
     # return print_cookie()
     # return print_https_with_verify()
     # return print_with_timeout()
