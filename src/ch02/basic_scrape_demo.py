@@ -21,7 +21,7 @@ import requests
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
 
 BASE_URL = 'https://ssr1.scrape.center'
-TOTAL_PAGE = 10
+TOTAL_PAGE = 2
 
 
 def scrape_page(url):
@@ -149,12 +149,18 @@ def main(page):
         logging.info('saving data to json file')
         save_data(data)
         logging.info('data saved successfully')
+        break
 
 
-if __name__ == '__main__':
+def mainx():
+    return main(1)
     # 采用多进程加速
-    pool = multiprocessing.Pool()
+    pool = multiprocessing.Pool(maxtasksperchild=2)
     pages = range(1, TOTAL_PAGE + 1)
     pool.map(main, pages)
     pool.close()
     pool.join()
+
+
+if __name__ == '__main__':
+    mainx()
