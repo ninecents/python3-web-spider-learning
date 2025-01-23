@@ -589,3 +589,4 @@ lint/tmp/
 *.hprof
 
 /src/ch13/AndServerTest/.idea
+.idea/
