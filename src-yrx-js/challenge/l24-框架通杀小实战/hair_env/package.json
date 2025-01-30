@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "main": "node main.js",
+    "main:dbg": "node --inspect-brk main.js",
+    "test": "node --inspect-brk test.js"
+  },
+  "dependencies": {
+    "jsdom": "^24.0.0",
+    "vm2": "^3.9.19"
+  }
+}
