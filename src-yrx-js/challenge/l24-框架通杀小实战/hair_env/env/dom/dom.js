@@ -1520,7 +1520,13 @@ Object.defineProperty(_base_dom.__proto__, "getAttribute", {
     get: function () {
         h_log("[v] _base_dom.__proto__ getAttribute value [get]", "arg:", arguments);
         return function () {
-            h_log("[v] _base_dom.__proto__ getAttribute value [call]", "arg:", arguments)
+            h_log("[v] _base_dom.__proto__ getAttribute value [call]", "arg:", arguments);
+            debugger;
+            if (this.__name === 'h_script_a' || this.__name === 'h_script_b') {
+              return 'm'
+            } else if (this.__name === 'h_meta_a' || this.__name === 'h_meta_b') {
+              return 'm'
+            }
         }
     }, enumerable: true, configurable: true
 });
@@ -1946,12 +1952,21 @@ Object.defineProperty(_base_dom.__proto__.__proto__, "ownerDocument", {
 });
 Object.defineProperty(_base_dom.__proto__.__proto__, "parentNode", {
     get: function () {
-        h_log("_base_dom.__proto__.__proto__ parentNode get [call]", "arg:", arguments)
+        h_log("_base_dom.__proto__.__proto__ parentNode get [call]", "arg:", arguments, this?.__name)
+        return new HTMLHeadElement()
+        // return {
+        //   removeChild: function () {
+        //     h_log("_base_dom.__proto__.__proto__ parentNode get [call] removeChild", "arg:", arguments, this?.__name)
+        //   }
+        // }
     }, set: undefined, enumerable: true, configurable: true,
 });
 Object.defineProperty(_base_dom.__proto__.__proto__, "parentElement", {
     get: function () {
-        h_log("_base_dom.__proto__.__proto__ parentElement get [call]", "arg:", arguments)
+        h_log("_base_dom.__proto__.__proto__ parentElement get [call]", "arg:", arguments, this?.__name)
+        return {
+          removeChild: function () {}
+        }
     }, set: undefined, enumerable: true, configurable: true,
 });
 Object.defineProperty(_base_dom.__proto__.__proto__, "childNodes", {

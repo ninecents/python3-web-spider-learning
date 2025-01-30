@@ -25,7 +25,7 @@ const vm = new VM({
   }
 });
 
-let code = "debugger;" // 便于调试
+let code = ";" // 便于调试
 // 加载框架代码
 code += fs.readFileSync("./env/init.js", "utf-8")
 code += fs.readFileSync("./env/public/eventTarget.js", "utf-8")
@@ -34,8 +34,9 @@ code += fs.readFileSync("./env/dom/dom.js", "utf-8")
 code += fs.readFileSync("./env/dom/document.js", "utf-8")
 code += fs.readFileSync("./env/dom/html_xxx_element.js", "utf-8")
 
-// code += fs.readFileSync("./env/bom/navigator.js", "utf-8")
+code += fs.readFileSync("./env/bom/navigator.js", "utf-8")
 code += fs.readFileSync("./env/bom/location.js", "utf-8")
+code += fs.readFileSync("./env/bom/MutationObserver.js", "utf-8")
 code += fs.readFileSync("./env/bom/window.js", "utf-8")
 
 

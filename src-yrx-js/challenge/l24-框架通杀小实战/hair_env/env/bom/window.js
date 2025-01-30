@@ -2324,14 +2324,14 @@ Object.defineProperty(window, "MutationRecord", {
         }
     }, enumerable: false, configurable: true
 });
-Object.defineProperty(window, "MutationObserver", {
-    get: function () {
-        h_log("[v] window MutationObserver value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window MutationObserver value [call]", "arg:", arguments)
-        }
-    }, enumerable: false, configurable: true
-});
+// Object.defineProperty(window, "MutationObserver", {
+//     get: function () {
+//         h_log("[v] window MutationObserver value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window MutationObserver value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: false, configurable: true
+// });
 Object.defineProperty(window, "MouseEvent", {
     get: function () {
         h_log("[v] window MouseEvent value [get]", "arg:", arguments);
@@ -3069,14 +3069,14 @@ Object.defineProperty(window, "HTMLMeterElement", {
         }
     }, enumerable: false, configurable: true
 });
-Object.defineProperty(window, "HTMLMetaElement", {
-    get: function () {
-        h_log("[v] window HTMLMetaElement value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window HTMLMetaElement value [call]", "arg:", arguments)
-        }
-    }, enumerable: false, configurable: true
-});
+// Object.defineProperty(window, "HTMLMetaElement", {
+//     get: function () {
+//         h_log("[v] window HTMLMetaElement value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window HTMLMetaElement value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: false, configurable: true
+// });
 Object.defineProperty(window, "HTMLMenuElement", {
     get: function () {
         h_log("[v] window HTMLMenuElement value [get]", "arg:", arguments);
@@ -3165,14 +3165,14 @@ Object.defineProperty(window, "HTMLIFrameElement", {
         }
     }, enumerable: false, configurable: true
 });
-Object.defineProperty(window, "HTMLHtmlElement", {
-    get: function () {
-        h_log("[v] window HTMLHtmlElement value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window HTMLHtmlElement value [call]", "arg:", arguments)
-        }
-    }, enumerable: false, configurable: true
-});
+// Object.defineProperty(window, "HTMLHtmlElement", {
+//     get: function () {
+//         h_log("[v] window HTMLHtmlElement value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window HTMLHtmlElement value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: false, configurable: true
+// });
 Object.defineProperty(window, "HTMLHeadingElement", {
     get: function () {
         h_log("[v] window HTMLHeadingElement value [get]", "arg:", arguments);
@@ -3181,14 +3181,14 @@ Object.defineProperty(window, "HTMLHeadingElement", {
         }
     }, enumerable: false, configurable: true
 });
-Object.defineProperty(window, "HTMLHeadElement", {
-    get: function () {
-        h_log("[v] window HTMLHeadElement value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window HTMLHeadElement value [call]", "arg:", arguments)
-        }
-    }, enumerable: false, configurable: true
-});
+// Object.defineProperty(window, "HTMLHeadElement", {
+//     get: function () {
+//         h_log("[v] window HTMLHeadElement value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window HTMLHeadElement value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: false, configurable: true
+// });
 Object.defineProperty(window, "HTMLHRElement", {
     get: function () {
         h_log("[v] window HTMLHRElement value [get]", "arg:", arguments);
@@ -3349,22 +3349,22 @@ Object.defineProperty(window, "HTMLButtonElement", {
         }
     }, enumerable: false, configurable: true
 });
-Object.defineProperty(window, "HTMLBodyElement", {
-    get: function () {
-        h_log("[v] window HTMLBodyElement value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window HTMLBodyElement value [call]", "arg:", arguments)
-        }
-    }, enumerable: false, configurable: true
-});
-Object.defineProperty(window, "HTMLBaseElement", {
-    get: function () {
-        h_log("[v] window HTMLBaseElement value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window HTMLBaseElement value [call]", "arg:", arguments)
-        }
-    }, enumerable: false, configurable: true
-});
+// Object.defineProperty(window, "HTMLBodyElement", {
+//     get: function () {
+//         h_log("[v] window HTMLBodyElement value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window HTMLBodyElement value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: false, configurable: true
+// });
+// Object.defineProperty(window, "HTMLBaseElement", {
+//     get: function () {
+//         h_log("[v] window HTMLBaseElement value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window HTMLBaseElement value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: false, configurable: true
+// });
 Object.defineProperty(window, "HTMLBRElement", {
     get: function () {
         h_log("[v] window HTMLBRElement value [get]", "arg:", arguments);
@@ -4632,7 +4632,7 @@ Object.defineProperty(window, "name", {
 Object.defineProperty(window, "location", {
     get: function () {
         h_log("window location get [call]", "arg:", arguments)
-        h_log("window location get [call]", "_location:", _location)
+        // h_log("window location get [call]", "_location:", _location)
         return _location
     }, set: function () {
         h_log("window location set [call]", "arg:", arguments)

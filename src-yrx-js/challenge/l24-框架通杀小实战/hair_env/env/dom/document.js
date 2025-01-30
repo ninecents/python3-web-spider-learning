@@ -138,6 +138,8 @@ Object.defineProperty(_document.__proto__.__proto__, "documentElement", {
       "arg:",
       arguments
     );
+    return void 0;
+    return new HTMLHtmlElement(); // khz
     // return _jsdom_document.documentElement
   },
   set: undefined,
@@ -286,6 +288,7 @@ Object.defineProperty(_document.__proto__.__proto__, "dir", {
 Object.defineProperty(_document.__proto__.__proto__, "body", {
   get: function () {
     h_log("_document.__proto__.__proto__ body get [call]", "arg:", arguments);
+    return new HTMLBodyElement();
     // return _jsdom_document.body
   },
   set: function () {
@@ -603,6 +606,7 @@ Object.defineProperty(_document.__proto__.__proto__, "visibilityState", {
       "arg:",
       arguments
     );
+    return "visible";
   },
   set: undefined,
   enumerable: true,
@@ -3085,6 +3089,7 @@ Object.defineProperty(_document.__proto__.__proto__, "createEvent", {
   enumerable: true,
   configurable: true,
 });
+let _createExpression={};_createExpression.__proto__={};Object.defineProperty(_createExpression.__proto__, "evaluate", {get:function(){h_log("[v] _createExpression.__proto__ evaluate value [get]","arg:", arguments);return function(){h_log("[v] _createExpression.__proto__ evaluate value [call]","arg:", arguments)}},enumerable: true, configurable: true});XPathExpression = function (){h_log("_createExpression.__proto__ constructor value [call]","arg:", arguments)};XPathExpression.prototype=_createExpression.__proto__;Object.defineProperty(_createExpression.__proto__, "constructor", {value:XPathExpression,writable: true,enumerable: false,configurable: true,});Object.defineProperty(_createExpression.__proto__, Symbol.toStringTag, {value:"XPathExpression",writable: false,enumerable: false,configurable: true,});
 Object.defineProperty(_document.__proto__.__proto__, "createExpression", {
   get: function () {
     h_log(
@@ -3092,12 +3097,13 @@ Object.defineProperty(_document.__proto__.__proto__, "createExpression", {
       "arg:",
       arguments
     );
-    return function () {
+    return function (a, b) {
       h_log(
         "[v] _document.__proto__.__proto__ createExpression value [call]",
         "arg:",
         arguments
       );
+      return new XPathExpression(a, b);
     };
   },
   enumerable: true,
@@ -3410,6 +3416,12 @@ Object.defineProperty(_document.__proto__.__proto__, "getElementsByTagName", {
       );
       if (arguments[0] === 'script') {
         return [new HTMLScriptElement('h_script_a'), new HTMLScriptElement('h_script_b')];
+      } else if (arguments[0] === 'meta') {
+        return [new HTMLMetaElement('h_meta_a'), new HTMLMetaElement('h_meta_b')];
+      } else if (arguments[0] === 'base') {
+        return [];
+      } else {
+        return [];
       }
     };
   },

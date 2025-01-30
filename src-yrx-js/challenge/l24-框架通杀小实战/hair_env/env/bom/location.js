@@ -15,6 +15,7 @@ Object.defineProperty(_location, "ancestorOrigins", {
 Object.defineProperty(_location, "href", {
     get: function () {
         h_log("_location href get [call]", "arg:", arguments)
+        return "https://python-spider.com/challenge/login?rt=https://python-spider.com/forum/content?uid=276"
     }, set: function () {
         h_log("_location href set [call]", "arg:", arguments)
     }, enumerable: true, configurable: false,
@@ -27,6 +28,7 @@ Object.defineProperty(_location, "origin", {
 Object.defineProperty(_location, "protocol", {
     get: function () {
         h_log("_location protocol get [call]", "arg:", arguments)
+        return "https:"
     }, set: function () {
         h_log("_location protocol set [call]", "arg:", arguments)
     }, enumerable: true, configurable: false,
@@ -41,6 +43,7 @@ Object.defineProperty(_location, "host", {
 Object.defineProperty(_location, "hostname", {
     get: function () {
         h_log("_location hostname get [call]", "arg:", arguments)
+        return "python-spider.com"
     }, set: function () {
         h_log("_location hostname set [call]", "arg:", arguments)
     }, enumerable: true, configurable: false,
@@ -48,6 +51,7 @@ Object.defineProperty(_location, "hostname", {
 Object.defineProperty(_location, "port", {
     get: function () {
         h_log("_location port get [call]", "arg:", arguments)
+        return ""
     }, set: function () {
         h_log("_location port set [call]", "arg:", arguments)
     }, enumerable: true, configurable: false,
@@ -55,6 +59,7 @@ Object.defineProperty(_location, "port", {
 Object.defineProperty(_location, "pathname", {
     get: function () {
         h_log("_location pathname get [call]", "arg:", arguments)
+        return "/challenge/login"
     }, set: function () {
         h_log("_location pathname set [call]", "arg:", arguments)
     }, enumerable: true, configurable: false,
@@ -62,6 +67,7 @@ Object.defineProperty(_location, "pathname", {
 Object.defineProperty(_location, "search", {
     get: function () {
         h_log("_location search get [call]", "arg:", arguments)
+        return '?rt=https://python-spider.com/forum/content?uid=276'
     }, set: function () {
         h_log("_location search set [call]", "arg:", arguments)
     }, enumerable: true, configurable: false,
@@ -69,6 +75,7 @@ Object.defineProperty(_location, "search", {
 Object.defineProperty(_location, "hash", {
     get: function () {
         h_log("_location hash get [call]", "arg:", arguments)
+        return ""
     }, set: function () {
         h_log("_location hash set [call]", "arg:", arguments)
     }, enumerable: true, configurable: false,
