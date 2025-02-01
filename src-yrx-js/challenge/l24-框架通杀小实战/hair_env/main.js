@@ -7,6 +7,10 @@ const fs = require("fs");
 
 const vm = new VM({
   sandbox: {
+    setTimeout: setTimeout,
+    // clearTimeout: clearTimeout,
+    setInterval: setTimeout,
+    // clearInterval: clearTimeout,
     // h_log: console.log,
     _h_log: console.log,
     // h_log: () => {

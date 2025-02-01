@@ -6067,22 +6067,22 @@ Object.defineProperty(window, "scrollTo", {
         }
     }, enumerable: true, configurable: true
 });
-Object.defineProperty(window, "setInterval", {
-    get: function () {
-        h_log("[v] window setInterval value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window setInterval value [call]", "arg:", arguments)
-        }
-    }, enumerable: true, configurable: true
-});
-Object.defineProperty(window, "setTimeout", {
-    get: function () {
-        h_log("[v] window setTimeout value [get]", "arg:", arguments);
-        return function () {
-            h_log("[v] window setTimeout value [call]", "arg:", arguments)
-        }
-    }, enumerable: true, configurable: true
-});
+// Object.defineProperty(window, "setInterval", {
+//     get: function () {
+//         h_log("[v] window setInterval value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window setInterval value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: true, configurable: true
+// });
+// Object.defineProperty(window, "setTimeout", {
+//     get: function () {
+//         h_log("[v] window setTimeout value [get]", "arg:", arguments);
+//         return function () {
+//             h_log("[v] window setTimeout value [call]", "arg:", arguments)
+//         }
+//     }, enumerable: true, configurable: true
+// });
 Object.defineProperty(window, "stop", {
     get: function () {
         h_log("[v] window stop value [get]", "arg:", arguments);
