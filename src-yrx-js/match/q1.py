@@ -3,8 +3,6 @@ import urllib3
 from datetime import datetime
 
 urllib3.disable_warnings()
-import re
-import json
 import execjs
 
 
