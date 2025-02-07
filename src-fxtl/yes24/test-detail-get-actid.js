@@ -3,8 +3,7 @@ node.exe .\src\test01\main.js
 
 */
 
-var actid = "act_1";
-var idPerf = "49937";
+var idPerf = "52090";var IsNetfunnelxx = '0';var NetfunnelActIDxxx = '';var actid = "act_1";
 
 if (idPerf == "42860") {
     actid = "act_s0711";
@@ -36,4 +35,4 @@ else if (idPerf == "49959" || idPerf == "51189")
 if(IsNetfunnel == "1")
     actid = NetfunnelActID;
 
-console.log(actid);
+console.log("actid: " + actid);
