@@ -1,0 +1,16 @@
+{
+  "name": "q05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run": "node files/vm.fmt.js",
+    "run2": "node files/output-step1-no-str.js",
+    "decode": "node tools/decode.js"
+  },
+  "dependencies": {
+    "@babel/node": "^7.26.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
