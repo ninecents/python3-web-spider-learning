@@ -7,7 +7,8 @@
     "run": "node files/vm.fmt.js",
     "run2": "node files/output-step2.js",
     "tools:decode": "node tools/decode.js",
-    "tools:tongji": "node tools/tongji.js"
+    "tools:tongji": "node tools/tongji.js",
+    "test": "node files/main.js"
   },
   "dependencies": {
     "@babel/node": "^7.26.0"
