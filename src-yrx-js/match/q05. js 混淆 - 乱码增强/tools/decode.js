@@ -18,7 +18,7 @@ let generate = require("@babel/generator").default;
 let traverse = require("@babel/traverse").default;
 const types = require("@babel/types");
 let fs = require("fs");
-const { str_decode } = require("./str_decode");
+const { str_decode, str_decode_property } = require("./str_decode");
 
 function main(ast) {
   // return console.log("===", str_decode("0x1f5", "aA59"));
@@ -51,6 +51,31 @@ function main(ast) {
             type: "StringLiteral",
             value: str_decode(arguments0),
           });
+        }
+      },
+    },
+  });
+
+  /*
+  字符串属性替换：
+ast示例：
+var _0xceb4b2 = [];
+_0xceb4b2[2222];
+  */
+  traverse(ast, {
+    MemberExpression: {
+      exit: function (path) {
+        if (
+          ["_0xceb4b2", "_$UH"].includes(path.get("object").node.name)
+        ) {
+          let property = path.get("property").node.value;
+          let ret = str_decode_property(property);
+          if (typeof property === "number" && ret) {
+            path.replaceInline({
+              type: "StringLiteral",
+              value: ret,
+            });
+          }
         }
       },
     },
@@ -222,5 +247,5 @@ let js_code = fs.readFileSync("./files/input.fmt.js", "utf-8");
 let ast = parse(js_code);
 main(ast);
 let decode_code = generate(ast, { comments: false }).code;
-fs.writeFileSync("./files/output-step1-no-str.js", decode_code);
+fs.writeFileSync("./files/output-step2.js", decode_code);
 console.log("================== finish");

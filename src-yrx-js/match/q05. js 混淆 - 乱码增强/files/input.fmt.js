@@ -23,6 +23,29 @@
 */
 window = globalThis;
 CryptoJS = require('./crypto-js');
+document = {
+  // cookie: 'yrx-13=A8ylTinQxLIswbT6E5p2O-kInSH7BXCvcqmEcyaN2HcasWIfThVAP8K5VAJ1',
+  getElementsByTagName: function() {
+      // console.log(arguments)
+      if (arguments === 'base'){
+          return []
+      }
+      return [tag]
+  },
+  createElement: function(a) {
+      if (a === 'canvas'){
+          return canvas
+      }
+      return tag
+  },
+  attachEvent: function(a, b, c) {},
+  documentElement: {
+      addBehavior: undefined,
+  },
+  addEventListener: function (a, b, c) {
+      b()
+  },
+}
 
 (function () {
   var _0x34bd = [

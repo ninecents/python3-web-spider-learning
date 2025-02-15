@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "run": "node files/vm.fmt.js",
-    "run2": "node files/output-step1-no-str.js",
-    "decode": "node tools/decode.js"
+    "run2": "node files/output-step2.js",
+    "tools:decode": "node tools/decode.js",
+    "tools:tongji": "node tools/tongji.js"
   },
   "dependencies": {
     "@babel/node": "^7.26.0"
