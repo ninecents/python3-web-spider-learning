@@ -494,55 +494,38 @@ https://www.telerik.com/fiddler/add-ons
 
 ## 6-续lesson5-object打印-frida-rpc
 
+### 分析enc错误原因
+
+
+
 ### 打印 object object
 
-​        方法一：
+#### 方法一：
+
 ​        1.先确认object是什么类型(比如要打印p) 先console.log(p.$className) 查看p是什么
 数据类型
-​    2.Java.cast 把p强转为对应类型
-​    3.调用该类对应的输出方法。通常有一个toString()方法
-​    方法二：
+​    	2.Java.cast 把p强转为对应类型
+​    	3.调用该类对应的输出方法。通常有一个toString()方法
+
+#### 方法二：
+
 ​        使用js里的JSON类
 ​        尝试 console.log(JSON.stringify(p))
 ​        可能打印不出来字符串，一般能打印出p的字节数组。（可以用着你的数据和真实数
 据的对比）
-​    bytes array 是object
-​        String 和 bytes array可以相互转化
-​        String.getBytes() 字符串转bytes array
-猿人学
-​                new String(bytes) bytes转成字符串。PS：本身如果是不可打印字符串，打印是乱码
-请求参数在jadx中搜索不到
-​    可能在so中
-​    可能是动态加载jar, apk, dex
-​    可能对字符串有编码(base64 unicode等等)或加密
-​    可能在资源文件里
-​    可能是内嵌浏览器webview，代码在JS中或由服务器返回
-​    解决方法：
-​        1.不定位参数，先找到url 顺着URL往下跟踪，借助hook
-​        2.盲狙，大范围hook，hook加密类
-​        3.从activity，从那儿顺着逻辑跟踪，借助hook
-​        jadx中有代码，但Hook不到类
-​            可能是动态加载dex，类可能在另外的classloader中，需要切换classloader再hook
-​            classloader概念普及 
-https://www.jianshu.com/p/96a72d1a7974
-​            hook加密类：
-​                    先总结各加密类的用法，key iv 明文 密文等是如何获取的，再hook对应的类和方法
-​                   AES 
-https://www.cnblogs.com/widgetbox/p/11611201.html
-​                   RSA 
-​                   DES 
-https://blog.csdn.net/qq_22075041/article/details/80698665
- https://www.jianshu.com/p/bf6b4afaf41e
-​                   MD5 SHA等摘要算
-法 
-https://blog.csdn.net/baidu_34045013/article/details/80687557
-​                   HMAC摘要算法 
-https://blog.csdn.net/cdzwm/article/details/6973345
-​    抽象方法
-​    接口类
-​    hook so
-​    hook jni
-​    frida choose
+
+#### 方法三：
+
+    	bytes array 是object
+        String 和 bytes array可以相互转化
+        String.getBytes() 字符串转bytes array
+​	new String(bytes) bytes转成字符串。PS：本身如果是不可打印字符串，打印是乱码
+
+#### 方法四：
+
+​		工具函数，如打印map等snippet代码。
+
+
 
 ### frida rpc：远程主动调用安卓代码
 
@@ -579,8 +562,89 @@ test='''
 
 ## 7-科普RSA
 
+
+
+
+
 ## 8-响应数据有加密
+
+
+
+### hook 类下所有的方法
+
+> - NetContent.class.getDeclaredMethods
+> - NetContent[methodName].overload
+> - apply(this, arguments)
+
+
+
+### 请求参数在jadx中搜索不到
+
+> 原因：
+>         可能在so中
+>         可能是`动态加载jar, apk, dex`
+>         可能对字符串有编码(base64 unicode等等)或加密
+>         可能在资源文件里
+>         可能是内嵌浏览器webview，代码在JS中或由服务器返回
+> 解决方法：
+>         1.不定位参数，先找到url 顺着URL往下跟踪，借助hook
+>         2.盲狙，大范围hook，hook加密类
+>         3.从activity，从那儿顺着逻辑跟踪，借助hook
+
+
+
+`动态加载jar, apk, dex`
+
+```js
+Java.enumerateClassLoaders({
+    onMatch: function(loader) {
+        Java.classFactory.loader = loader;
+        try{
+            Java.use('').decrypt.implementation
+        }
+    }
+})
+```
+
+
+
+
+
+### jadx中有代码，但Hook不到类
+
+>  原因：
+>         可能是动态加载dex，类可能在另外的classloader中，需要切换classloader再hook
+>             classloader概念普及 
+> https://www.jianshu.com/p/96a72d1a7974
+
+
+
+### hook加密类：
+
+> 先总结各加密类的用法，key iv 明文 密文等是如何获取的，再hook对应的类和方法
+
+|                   |                                                              |      |
+| ----------------- | ------------------------------------------------------------ | ---- |
+| AES               | https://www.cnblogs.com/widgetbox/p/11611201.html            |      |
+| RSA               |                                                              |      |
+| DES               | https://blog.csdn.net/qq_22075041/article/details/80698665<br/> https://www.jianshu.com/p/bf6b4afaf41e |      |
+| MD5 SHA等摘要算法 | https://blog.csdn.net/baidu_34045013/article/details/80687557 |      |
+| HMAC摘要算法      | https://blog.csdn.net/cdzwm/article/details/6973345          |      |
+
+
+
+> 
+>
+> ​    抽象方法
+> ​    接口类
+> ​    hook so
+> ​    hook jni
+> ​    frida choose
+
+
+
 ## 9-nexus6p刷机root
+
 ## 10-反序列化protobuf和简单so
 ## 11-抓包环境配置
 ## 12-抓包场景和阻碍解决方案基本概念
