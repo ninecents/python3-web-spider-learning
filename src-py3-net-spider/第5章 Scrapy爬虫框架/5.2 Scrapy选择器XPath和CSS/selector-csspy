@@ -1,0 +1,24 @@
+from scrapy.selector import Selector
+from os.path import join, dirname, realpath
+
+
+def main():
+    if False:
+        body = '<html><body><span>good</span></body></html>'
+        sel = Selector(text=body)
+        print(sel.xpath('//span/text()').extract())
+        
+    file_path = join(dirname(realpath(__file__)), 'superHero.xml')
+    with open(file_path, 'r') as rf:
+        body = rf.read()
+        # Selector会将xml补全为标准html：增加<html><body>
+        sel = Selector(text=body)
+        print(sel.css('class').extract())
+        print(sel.css('class name').extract())
+        print(sel.css('class name').extract()[0])
+        print(sel.css('[lang="en"]').extract())
+    
+    
+if __name__ == '__main__':
+    main()
+    

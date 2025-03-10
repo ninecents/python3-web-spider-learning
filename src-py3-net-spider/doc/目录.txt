@@ -1,3 +1,6 @@
+## Python3 网络爬虫实战
+胡松涛
+
 第1章 Python环境配置 1
 1.1 Python简介 1
 1.1.1 Python的历史由来 1
