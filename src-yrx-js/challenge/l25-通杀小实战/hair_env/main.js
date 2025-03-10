@@ -23,7 +23,7 @@ let html = fs.readFileSync("./work/work.html", "utf-8")
 const $ = cheerio.load(html);
 const vm = new VM({
     sandbox: {
-        h_log: config.DEBUG?console.log:function (){},
+        _h_log: config.DEBUG?console.log:function (){},
         setTimeout: _setTimeout,
         setInterval: _setTimeout,
         config_LOCATION: config.LOCATION,
