@@ -1,3 +1,17 @@
+
+ITEM_PIPELINES = {
+   'tutorial.pipelines.TextPipeline': 300,
+   'tutorial.pipelines.MongoPipeline': 400,
+}
+MONGO_URI='localhost'
+MONGO_DB='tutorial'
+
+
+
+
+
+
+
 # Scrapy settings for tutorial project
 #
 # For simplicity, this file contains only settings considered important or
