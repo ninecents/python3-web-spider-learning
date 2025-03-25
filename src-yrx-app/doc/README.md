@@ -1,7 +1,7 @@
 ## 目录
 
 
-| 题目 | 关键词 |      |      |      |
+| 题目 | 关键词 | 资源 |      |      |
 | ---- | ---- | ---- | ---- | ---- |
 |  1-安卓基础环境与逆向工具    | 安装JAVA：反编译工具依赖java |      |      |      |
 |  2-frida配置-frida使用基础    |      |      |      |      |
@@ -34,12 +34,12 @@
 |  29-魔改版fartext增强功能脱壳机实战1    |      |      |      |      |
 |  30-魔改版fartext增强功能脱壳机实战2    |      |      |      |      |
 |  31-frida检测案例源码及检测点分析    |      |      |      |      |
-|  32-自编译frida对抗检测实战及流程    |      |      |      |      |
+|  32-自编译frida对抗检测实战及流程    |      | EnvCheck_1.0--com.yimian.envcheck.apk<br />58bd_10.14.0--com.wuba.town.client.apk |      |      |
 |  33-objection常规入门使用简介    |      |      |      |      |
-|  34-frida基础使用1    |      |      |      |      |
+|  34-frida基础使用1    |      | LessonTest没网络权限.apk |      |      |
 |  35-frida基础使用2    |      |      |      |      |
 |  36-frida基础使用3    |      |      |      |      |
-|  37-frida-hook-so基础1    |      |      |      |      |
+|  37-frida-hook-so基础1    |      | LessonTest配合nativehook改造.apk |      |      |
 |  38-frida-hook-so基础2    |      |      |      |      |
 |  39-ida，trace分析还原ollvm1    |      |      |      |      |
 |  40-ida，trace分析还原ollvm2    |      |      |      |      |
@@ -647,6 +647,77 @@ Java.enumerateClassLoaders({
 
 ## 10-反序列化protobuf和简单so
 ## 11-抓包环境配置
+
+### 为什么不使⽤代理⽅式抓包？
+
+#### 易检测
+
+- System.getProperty("http.proxyHost")
+- System.getProperty("http.proxyPort")
+
+#### 无法捕获封包: no_proxy
+
+-  new OkHttpClient().newBuilder().proxy(Proxy.NO_PROXY).build(); 
+
+### 为什么使⽤vpn⽅式抓包？
+
+- 运⾏在⽹络层，使⼿机的路由器/路由表改变
+- 更加底层，意味着可以捕获更多的上层流量
+
+### VPN + 中间⼈抓包
+
+- postern：
+
+  - https://github.com/postern-overwal/postern-stuff
+
+-  charles 下载：
+
+  - https://www.charlesproxy.com/download/
+
+-  charles 激活码：
+
+  - https://www.zzzmode.com/mytools/charles/
+
+  
+
+### 安装证书
+
+同⼀局域⽹下，通过系统配置http代理⽅式，浏览器访问`chls.pro/ssl `
+
+，安装证书到设备
+搞定证书以后，此后就使⽤postern配置charles的socks模式代理的⽅式抓包了
+
+### 信任证书
+
+>  `/data/misc/user/0/cacerts-added/`    ------->       `/system/etc/security/cacerts`
+
+- magisk(v23.0,其他版本未测试) + Move Certificates 插件
+
+- 直接⽤re管理器(可以挂载读写权限)或mt管理器搞
+
+- 尽量别⼿动adb命令，否则可能还要解决⼀些挂载问题
+
+  
+
+### VPN + 中间⼈抓包 + 科学上⽹
+
+charles 设置 `external proxy` 
+
+### ⼿机VPN App抓包
+
+- HttpCanary：可以选择特定的app进⾏⽹络流量分析，下载地址：
+
+  - [HttpCanary安卓版应用APK下载 (apkpure.com)](https://apkpure.com/cn/httpcanary-—-http-sniffer-capture-analysis/com.guoshi.httpcanary)
+  - [Reqable安卓版应用APK下载 (apkpure.com)](https://apkpure.com/cn/reqable-api-testing-capture/com.reqable.android)
+- ProxyPin
+  - github
+- ps: ⾄于能不能选择特定的app的流量，是由VPN软件决定的，postern这个软件⽬前不⽀持
+
+### VPN检测
+
+- java.net.NetworkInterface.getName() 
+- android.net.ConnectivityManager.getNetworkCapabilities(network)  
+
 ## 12-抓包场景和阻碍解决方案基本概念
 ## 13-vpn中间人抓包TCPdemo
 ## 14-tcp与ssl发包java和native层溯源
@@ -667,9 +738,366 @@ Java.enumerateClassLoaders({
 ## 29-魔改版fartext增强功能脱壳机实战1
 ## 30-魔改版fartext增强功能脱壳机实战2
 ## 31-frida检测案例源码及检测点分析
+
+### 检测案例：多种特征检测 Frida
+>
+>https://bbs.pediy.com/thread-217482.htm
+>
+>https://github.com/muellerberndt/frida-detection
+>
+>https://github.com/qtfreet00/AntiFrida
+>
+>检测点
+>
+>- 进程检测
+>
+>- 端⼝检测
+>
+>- dbus 通信检测
+>
+>- maps特征检测
+>
+>- 内存特征检测
+>
+>- svc 实现openat/read 等
+>  -  [[原创\]小菜花的frida-svc-interceptor-Android安全-看雪-安全社区|安全招聘|kanxue.com](https://bbs.kanxue.com/thread-270144.htm)
+>  - [[原创\]分享一个Android通用svc跟踪以及hook方案——Frida-Seccomp-Android安全-看雪-安全社区|安全招聘|kanxue.com](https://bbs.kanxue.com/thread-271815.htm)
+>  - [[原创\]《安卓逆向这档事》第十九课、表哥，你也不想你的Frida被检测吧!(下)-Android安全-看雪-安全社区|安全招聘|kanxue.com](https://bbs.kanxue.com/thread-282623.htm)
+>- ⾃实现字符串⽐较：memcmp
+>
+
+###  检测案例：DetectFrida
+>
+>  https://github.com/kumar-rahul/detectfridalib
+>
+> 检测点
+>
+> 线程检测
+>
+> fd 检测
+>
+> 被hook so特征检测
+>
+> inline + ⾃实现str 相关操作函数
+
+### 检测案例：从inlinehook ⻆度检测frida
+>
+>  https://bbs.pediy.com/thread-269862.htm
+>
+> 检测点
+>
+> 特定native hook特征
+>
+> ⽬标java hook特征
+
+### 检测案例：关于frida检测的⼀个新思路
+>
+> https://bbs.pediy.com/thread-268586.htm
+>
+> 检测点
+>
+> maps 段rwxp权限特征
+>
+> 特定native hook特征
+
+### 检测案例：Anti Frida
+>
+>  https://github.com/TUGOhost/anti_Android/blob/main/app/src/main/cpp/anti_frida.c
+>
+> 检测点
+>
+> 针对frida注⼊特性
+>
+> 只有attach对抗
+
+### 检测案例：FridaCheck.apk
+>
+> 检测点
+>
+> 端⼝检测
+>
+> 线程检测
+>
+> maps检测
+>
+> fd 检测
+>
+> 内存特征检测
+
+### 检测总结
+
+> 只针对上⽂检测案例
+>
+> - 进程检测（⾃编译frida解决）
+>
+> - 端⼝检测（⾃定义端⼝解决）
+>
+> - dbus 通信检测
+>
+> - maps特征检测（⾃编译frida解决⼀部分）
+>
+> 	- maps 段rwxp权限特征
+>
+> - 遍历so内存字符串特征检测（字符串patch解决⼀部分，⾃定义内核过滤maps解决⼤部分，但so链表也能遍历到每个加载的so）
+>
+> - 线程检测（⾃编译frida解决⼀部分）
+>
+> - fd 检测（⾃编译frida解决）
+>
+> - svc 实现openat/read 等（参考看雪frida-seccomp）
+>
+> - 针对frida注⼊特性（不处理，spawn > attach ）
+>
+> 	- 只有attach对抗
+>
+> - hook 特征（暂不处理）
+>
+> 	- 特定native hook特征
+>
+> 	- ⽬标java hook特征
+>
+> 	- 被hook so特征检测
+>
+> - inline + ⾃实现str 相关操作函数（暂不处理）
+>
+
+
+
+### 反反调试实现
+
+>
+> 
+>编译可参考：
+> 
+>fridaserver去特征检测以及编译
+> 
+>https://bbs.pediy.com/thread-272536.htm
+> 
+>(patch逻辑有lief操作，记得pip3 install lief，然后一遍过)
+> 
+>frida-20220715
+> 
+>1，https://github.com/AAAA-Project/Patchs.git
+> 
+>2，去除uuid特征
+> 
+>3，去frida-helper特征
+> 
+>纯⽂本
+>  
+>frida-20220716
+>  
+>1，去除线程特征 + pool-frida(没效果) (gdbus改了报错(霜哥正常)，Unable to get frontmost application on localhost:6666: process wi
+>  
+>2，去tmp特征
+>  
+>3，去maps权限特征
+> 
+>4，memstring特征（FridaScriptEngine，GLib-GIO，GDBusProxy，GumScript）（这里永远改不全，要想彻底bypass搭配自定义内核隐藏maps食用更佳
+> 
+>自编译得frida会发到猿人学网盘，后续会持续更新ing，公众号[妄为写代码]回复[frida]获取(自愿)
+> 
+>日常操作：
+>  
+>1，深入hook strcmp，strstr，pthread_create
+>  
+>2,  自定义端口
+> 
+>内核日志:
+> 
+>adb logcat -b kernel |grep HEXL
+> 
+>日常操作带上，实在不行只能去分析patch了
+
+
+
+> 测试效果(cmder)：
+>
+> cd'/d/BaiduNetdiskDownload/__猿人学/工具/2. 新-section2-讲义软件代码/lesson11以后讲义代码工具/f1rida/file/''
+>
+> frida -f com.wuba.town.client
+>
+> frida -f com.wuba.town.client   -l antiFridaBypass.js
+
+
+
 ## 32-自编译frida对抗检测实战及流程
 ## 33-objection常规入门使用简介
 ## 34-frida基础使用1
+
+### 开发环境配置：vscode提示frida函数等（@types/frida-gum ）
+
+> -  下载node
+>   - nvm
+>   - https://nodejs.org/zh-cn/download/ (zip包+环境变量)
+> - 安装 `@types/frida-gum `
+>   - npm install @types/frida-gum 
+>
+> 
+
+
+
+### 见过的较好的frida笔记： 
+
+> https://kevinspider.github.io/frida/frida-hook-java/ 
+>
+> https://kevinspider.github.io/frida/frida-hook-so/ 
+>
+> https://eternalsakura13.com/2020/07/04/frida/ 
+
+### 官方api： 
+>
+> https://frida.re/docs/javascript-api/ 
+
+###  课程练习apk源码及下载地址 
+>
+> https://github.com/huaerxiela/LessonTest 
+>
+> https://github.com/huaerxiela/LessonTest/releases 
+
+### 启动
+
+> - attach
+>
+>   - `frida -U -F   -l demo-frida.js`
+>
+>   - `frida -U -N com.hexl.lessontest   -l demo-frida.js -q`
+>
+>   - `frida -U LessonTest   -l demo-frida.js -q`
+>
+> frida16已经没有 `--no-pause`了
+
+> - spawn
+>
+>   - `frida -U -f com.hexl.lessontest   -l demo-frida.js`
+>   
+
+### Hook 普通方法
+
+### Hook 重载方法（）
+
+### Hook 构造方法
+
+### Hook 对象
+
+
+
+> 优雅的frida-rpc 
+>
+> https://mp.weixin.qq.com/s/zu3jEd38NxlemBpfN3TnHw 
+>
+> 查看手机架构 
+>
+> adb shell getprop ro.product.cpu.abi 
+>
+> Android逆向之分析基操 
+>
+> https://mp.weixin.qq.com/s/IovgsqprLYSnKsH61EP-EQ 
+>
+> 细说So动态库的加载流程 
+>
+> https://bbs.pediy.com/thread-255674.htm 
+>
+> .init .initarray和JNIOnload 
+>
+> https://www.cnblogs.com/runope/p/14789784.html 
+>
+> Frida hook Java/Native与init_array 自吐最终方案 
+>
+> https://bbs.pediy.com/thread-267430.htm
+>
+> dlopen -> CallConstructors -> init，init_array(反调试，检测，ollvm字符串加解密) 
+> dlsym(JNI_ONLOAD)
+>
+> 对app自身so文件的自定义svc进行hook 
+>
+> 1，so加载进内存，完成重定位 
+>
+> 2，init，init_array之前 
+>
+>  
+>
+> so dump之后修复：SOFIXER 
+>
+>  
+>
+> //应用以32位在64位终端环境下运行 
+>
+> //adb install --abi armeabi-v7a <path to apk> 
+>
+>  
+>
+>  
+>
+> so分析(trace) 
+>
+>  ida-ins trace 
+>
+>  frida-stalker 
+>
+>   目前只支持arm64，why：arm32终将过去式，arm64才是主流 
+>
+>   sktrace：https://github.com/huaerxiela/sktrace.git 
+>
+>    课程环境： 
+>
+>    frida --version: 15.2.2 
+>
+>    frida-server --version: 15.2.2 
+>
+>    example：python sktrace.py -m attach -l libhello-jni.so -i 0x1CFF0 Hel
+>
+>  unicorn-unidbg-kingtrace 
+
+
+
+> ```js
+> function searchInterface() { 
+>     Java.perform(function () { 
+>         Java.enumerateLoadedClasses({ 
+>             onComplete: function () { }, 
+>             onMatch: function (name, handle) { 
+>                 if (name.indexOf("com.hexl.lessontest.logic") > -1) { // 使用
+>                     var targetInterface = "com.hexl.lessontest.logic.Interface";
+>                     if (targetInterface === name) { 
+>                         return; 
+>                     } 
+>                     console.log("find class"); 
+>                     var targetClass = Java.use(name); 
+>                     console.log("\t", name); 
+>                     var superClassName; 
+>                     while (1) { 
+>                         var interfaceList = targetClass.class.getInterfaces
+>                         if (interfaceList.length > 0) { 
+>                             for (var i in interfaceList) { 
+>                               var interString = interfaceList[i].toString
+>                               if (interString.indexOf(targetInterface) {
+>                                   console.log("\t\t\t", interString); // 
+>                                   break; 
+>                               } 
+>                           } 
+>                       } 
+>                       superClassName = targetClass.$super.$className; 
+>                       targetClass = targetClass.$super; 
+>                       if ("java.lang.Object" === superClassName) { 
+>                           break; 
+>                       } 
+>                       console.log("\t\t", superClassName) // 打印类名 
+>                   } 
+>               } 
+> 
+>           } 
+>       }) 
+>   }) 
+> } 
+> 
+> setImmediate(searchInterface)
+> 
+> ```
+
+
+
+
 ## 35-frida基础使用2
 ## 36-frida基础使用3
 ## 37-frida-hook-so基础1

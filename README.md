@@ -10,5 +10,5 @@
 | | 爬虫逆向进阶实战 | 李玺 | - 工具多<br />- 例子多<br />- webjs逆向（高级）<br />- 小程序、app |  |
 | | 安卓Frida逆向与抓包实战 | 陈佳林 | - frida<br />- objection<br />- 各种应用层框架的抓包技术 |  |
 | | 安卓Frida逆向与协议分析 | 陈佳林<br />`r0ysue` | - 协议分析和逆向 | https://github.com/r0ysue/AndroidFridaSeniorBook<br />[安卓Frida逆向与协议分析 - 第1章 安卓逆向环境搭建 - 陈佳林 - 微信读书](https://weread.qq.com/web/reader/70532450813ab717fg015947k16732dc0161679091c5aeb1) |
-| | | | |  |
+| | python3爬虫实战 | 姚良 | - 数据清洗、分析、可视化<br />- 大量实战案例 |  |
 | | | | |  |
