@@ -34,7 +34,7 @@
 |  29-魔改版fartext增强功能脱壳机实战1    |      |      |      |      |
 |  30-魔改版fartext增强功能脱壳机实战2    |      |      |      |      |
 |  31-frida检测案例源码及检测点分析    |      |      |      |      |
-|  32-自编译frida对抗检测实战及流程    |      | EnvCheck_1.0--com.yimian.envcheck.apk<br />58bd_10.14.0--com.wuba.town.client.apk |      |      |
+|  32-自编译frida对抗检测实战及流程    |      | EnvCheck_1.0--com.yimian.envcheck.apk<br />~~58bd_10.14.0--com.wuba.town.client.apk~~ |      |      |
 |  33-objection常规入门使用简介    |      |      |      |      |
 |  34-frida基础使用1    |      | LessonTest没网络权限.apk |      |      |
 |  35-frida基础使用2    |      |      |      |      |
@@ -909,15 +909,32 @@ charles 设置 `external proxy`
 > 
 >日常操作带上，实在不行只能去分析patch了
 
+#### my-实验
+
+> 环境准备
+>
+> - 58apk新版本的 13.24.3： [58同城下载2025安卓最新版_手机app官方版免费安装下载_豌豆荚](https://www.wandoujia.com/apps/38769)
+> - 雷电模拟器9.1.38.2：夜神模拟器默认需要hyper-v（点击修复才可以，需要重启）
+>   - 开启root，否则报错`unable to find process with name 'system_server'`
+> - frida-server
+>   - set PATH=C:\leidian\LDPlayer9;%PATH%
+>   - adb push "frida-server-16.5.9-android-x86_64" /data/local/tmp/fs64
+>   - ~~adb push "D:\BaiduNetdiskDownload\__猿人学\工具\2.新-section2-讲义软件代码\lesson11以后讲义代码工具\f1rida\file\hexl-server-64" /data/local/tmp/xfs64~~
+> - hexl-server-64 只支持arm机器，模拟器不能用，只能真机测试
 
 
-> 测试效果(cmder)：
+
+> 测试效果(cmder)：58同城
 >
-> cd'/d/BaiduNetdiskDownload/__猿人学/工具/2. 新-section2-讲义软件代码/lesson11以后讲义代码工具/f1rida/file/''
+> cd   /d D:\BaiduNetdiskDownload\__猿人学\工具\2.新-section2-讲义软件代码\lesson11以后讲义代码工具\f1rida\file
 >
-> frida -f com.wuba.town.client
+> 确定包名：`adb shell dumpsys window | findstr mCurrentFocus`
 >
-> frida -f com.wuba.town.client   -l antiFridaBypass.js
+> frida -U -f com.yimian.envcheck   -l antiFridaBypass.js
+>
+> frida -U -f com.wuba
+>
+> frida -U -f com.wuba   -l antiFridaBypass.js
 
 
 
